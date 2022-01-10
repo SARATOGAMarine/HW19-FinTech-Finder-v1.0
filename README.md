@@ -1,12 +1,12 @@
-## FinTech Recruiting Platform Uses P2P Payments on Ethereum
+# FinTech Recruiting Platform Uses P2P Payments on Ethereum
 
 ![An image shows a wallet with bitcoin.](Images/19-4-challenge-image.png)
 
-# Background
+## Background
 
 You work at a startup that is building a new and disruptive platform called Fintech Finder. Fintech Finder is an application that its customers can use to find fintech professionals from among a list of candidates, hire them, and pay them. As Fintech Finder’s lead developer, you have been tasked with integrating the Ethereum blockchain network into the application in order to enable your customers to instantly pay the fintech professionals whom they hire with cryptocurrency.
 
-# Scope
+## Scope
 
 1. Generate a new Ethereum account instance by using the mnemonic seed phrase provided by Ganache.
 2. Fetch and display the account balance associated with your Ethereum account address.
@@ -14,8 +14,7 @@ You work at a startup that is building a new and disruptive platform called Fint
 4. Digitally sign a transaction that pays a Fintech Finder candidate, and send this transaction to the Ganache blockchain.
 5. Review the transaction hash code associated with the validated blockchain transaction.
 
-
-# Deliverable
+## Deliverable
 
 * Web API the end user interacts with to make payments.
 * Wallet application to house user information and transaction history.
