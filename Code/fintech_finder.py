@@ -70,16 +70,56 @@ w3 = Web3(Web3.HTTPProvider('HTTP://127.0.0.1:7545'))
 
 
 ################################################################################
-# Step 1 - Part 3:
-# Import the following functions from the `crypto_wallet.py` file:
-# * `generate_account`
-# * `get_balance`
-# * `send_transaction`
 
-# @TODO:
-# From `crypto_wallet.py import the functions generate_account, get_balance,
-#  and send_transaction
-# YOUR CODE HERE
+# Importing functions from the Crypto Wallet file:
+
+def generate_account():
+    # access mnemonic phrase
+    mnemonic = os.getenv("MNEMONIC")
+
+    # create wallet instance
+    wallet = wallet(mnemonic)
+    
+    # derive private key
+    private, public = wallet, derive_account("eth")
+    
+    # convert private key to Ethereum account
+    account = Account.privateKeyToAccount(private)
+
+    return account
+
+def get_balance():
+    # get the balance of address in Wei
+    wei_balance = w3.eth.get_balance(address)
+    
+    # convert wei value into ether
+    ether = w3.fromWei(wei_balance, "ether")
+
+    return ether
+
+def send_transaction():
+    # set gas price strategy
+    w3.eth.setGasPriceStrategy(medium_gas_price_strategy)
+    
+    # convert eth amount to wei
+    wei_value = w3.toWei(ether, "ether")
+
+    # calculate estimated gas
+    gas_estimate = w3.eth.estimateGas({"to": receiver, "from": account.address, "value": wei_value})
+
+    #Construct raw transaction
+    raw_tx = {
+        "to": receiver,
+        "from": account.address,
+        "value": wei_value,
+        "gas": gas_estimate,
+        "gasPrice": 0,
+        "nonce": w3.eth.getTransactionCount(account.address)
+    }
+
+account = generate_account
+
+st.sidebar.write(get_balance(account.address))
 
 ################################################################################
 # Fintech Finder Candidate Information
@@ -128,9 +168,10 @@ st.sidebar.markdown("## Client Account Address and Ethernet Balance in Ether")
 # `generate_account` function. This function will create the Fintech Finder
 # customer’s (in this case, your) HD wallet and Ethereum account.
 
+
 # @TODO:
 #  Call the `generate_account` function and save it as the variable `account`
-# YOUR CODE HERE
+account = generate_account
 
 ##########################################
 
@@ -146,7 +187,7 @@ st.sidebar.write(account.address)
 # @TODO
 # Call `get_balance` function and pass it your account address
 # Write the returned ether balance to the sidebar
-# YOUR CODE HERE
+st.sidebar.write(get_balance(account.address))
 
 ##########################################
 
@@ -182,8 +223,6 @@ st.sidebar.markdown("## Total Wage in Ether")
 
 ################################################################################
 # Step 2: Sign and Execute a Payment Transaction
-
-# Complete the following steps:
 
 # 1. Fintech Finder customers will select a fintech professional from the
 # application interface’s drop-down menu, and then input the amount of time for
@@ -237,11 +276,11 @@ st.sidebar.markdown("## Total Wage in Ether")
 # Calculate total `wage` for the candidate by multiplying the candidate’s hourly
 # rate from the candidate database (`candidate_database[person][3]`) by the
 # value of the `hours` variable
-# YOUR CODE HERE
+wage = hourly_rate * hours
 
 # @TODO
 # Write the `wage` calculation to the Streamlit sidebar
-# YOUR CODE HERE
+st.sidebar.write(wage)
 
 ##########################################
 # Step 2 - Part 2:
@@ -251,9 +290,11 @@ st.sidebar.markdown("## Total Wage in Ether")
     #  From the `account` instance, the application will be able to access the
     #  `account.address` information that is needed to populate the `from` data
     # attribute in the raw transaction.
+    
     #- The `candidate_address` (which will be created and identified in the
     # sidebar when a customer selects a candidate). This will populate the `to`
     # data attribute in the raw transaction.
+    
     # - The `wage` value. This will be passed to the `toWei` function to
     # determine the wei value of the payment in the raw transaction.
 
@@ -268,7 +309,9 @@ if st.sidebar.button("Send Transaction"):
     # Call the `send_transaction` function and pass it 3 parameters:
     # Your `account`, the `candidate_address`, and the `wage` as parameters
     # Save the returned transaction hash as a variable named `transaction_hash`
-    # YOUR CODE HERE
+    transaction_hash = send_transaction("account","candidate_address", "wage")
+
+    return transaction_hash
 
     # Markdown for the transaction hash
     st.sidebar.markdown("#### Validated Transaction Hash")
