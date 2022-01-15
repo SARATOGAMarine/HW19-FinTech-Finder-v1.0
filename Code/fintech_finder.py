@@ -15,9 +15,7 @@ w3 = Web3(Web3.HTTPProvider('HTTP://127.0.0.1:7545'))
 
 from crypto_wallet import generate_account, get_balance, send_transaction
 
-account = generate_account
-
-st.sidebar.write(get_balance(account.address))
+account = generate_account()
 
 ################################################################################
 # Fintech Finder Candidate Information
@@ -63,7 +61,7 @@ st.sidebar.markdown("## Client Account Address and Ethernet Balance in Ether")
 ##########################################
 
 # Called the `generate_account` function assigned as a variable `account`
-account = generate_account
+
 
 ##########################################
 
@@ -74,7 +72,7 @@ st.sidebar.write(account.address)
 
 # Call `get_balance` function and pass it your account address
 # Write the returned ether balance to the sidebar
-st.sidebar.write(get_balance(account.address))
+st.sidebar.write(get_balance)
 
 ##########################################
 
