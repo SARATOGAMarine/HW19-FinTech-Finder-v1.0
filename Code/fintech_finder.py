@@ -66,13 +66,13 @@ st.sidebar.markdown("## Client Account Address and Ethernet Balance in Ether")
 ##########################################
 
 # Write the client's Ethereum account address to the sidebar
-st.sidebar.write(account.address)
+st.sidebar.write(account)
 
 ##########################################
 
 # Call `get_balance` function and pass it your account address
 # Write the returned ether balance to the sidebar
-st.sidebar.write(get_balance)
+st.sidebar.write(get_balance(w3, address))
 
 ##########################################
 
