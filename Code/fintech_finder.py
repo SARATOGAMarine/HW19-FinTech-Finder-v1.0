@@ -15,8 +15,6 @@ w3 = Web3(Web3.HTTPProvider('HTTP://127.0.0.1:7545'))
 
 from crypto_wallet import generate_account, get_balance, send_transaction
 
-account = generate_account()
-
 ################################################################################
 # Fintech Finder Candidate Information
 
@@ -59,23 +57,21 @@ st.text(" \n")
 st.sidebar.markdown("## Client Account Address and Ethernet Balance in Ether")
 
 ##########################################
-
 # Called the `generate_account` function assigned as a variable `account`
-
+account = generate_account()
 
 ##########################################
-
 # Write the client's Ethereum account address to the sidebar
-st.sidebar.write(account)
+st.sidebar.write(account.address)
 
 ##########################################
-
 # Call `get_balance` function and pass it your account address
+get_balance(w3, address)
+
 # Write the returned ether balance to the sidebar
-st.sidebar.write(get_balance(w3, address))
+st.sidebar.write(get_balance)
 
 ##########################################
-
 # Create a select box to chose a FinTech Hire candidate
 person = st.sidebar.selectbox('Select a Person', people)
 
@@ -93,7 +89,7 @@ st.sidebar.write(candidate)
 # Identify the FinTech Finder candidate's hourly rate
 hourly_rate = candidate_database[person][3]
 
-# Write the inTech Finder candidate's hourly rate to the sidebar
+# Write the FinTech Finder candidate's hourly rate to the sidebar
 st.sidebar.write(hourly_rate)
 
 # Identify the FinTech Finder candidate's Ethereum Address
@@ -108,7 +104,7 @@ st.sidebar.markdown("## Total Wage in Ether")
 
 ################################################################################
 
-wage = hourly_rate * hours
+wage = hourly_rate*hours
 
 # Write the `wage` calculation to the Streamlit sidebar
 st.sidebar.write(wage)
@@ -117,8 +113,7 @@ st.sidebar.write(wage)
 
 if st.sidebar.button("Send Transaction"):
 
-    transaction_hash = send_transaction("account","candidate_address", "wage")
-    transaction_hash
+    transaction_hash = send_transaction(w3, account, candidate_address, wage)
     
     # Markdown for the transaction hash
     st.sidebar.markdown("#### Validated Transaction Hash")

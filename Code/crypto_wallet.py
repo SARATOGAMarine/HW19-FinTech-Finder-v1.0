@@ -31,9 +31,9 @@ def generate_account():
     # Convert private key into an Ethereum account
     account = Account.privateKeyToAccount(private)
 
-    return account
+    return acoount
 
-def get_balance(w3, address):
+def get_balance(w3, aaddress):
     """Using an Ethereum account address access the balance of Ether"""
     # Get balance of address in Wei
     wei_balance = w3.eth.get_balance(address)
