@@ -33,7 +33,7 @@ def generate_account():
 
     return acoount
 
-def get_balance(w3, aaddress):
+def get_balance(w3, address):
     """Using an Ethereum account address access the balance of Ether"""
     # Get balance of address in Wei
     wei_balance = w3.eth.get_balance(address)
@@ -58,8 +58,8 @@ def send_transaction(w3, account, to, wage):
 
     # Construct a raw transaction
     raw_tx = {
-        "to": to,
         "from": account.address,
+        "to": to,
         "value": value,
         "gas": gasEstimate,
         "gasPrice": 0,
