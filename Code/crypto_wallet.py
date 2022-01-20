@@ -20,7 +20,7 @@ from web3.gas_strategies.time_based import medium_gas_price_strategy
 def generate_account():
     """Create a digital wallet and Ethereum account from a mnemonic seed phrase."""
     # Fetch mnemonic from environment variable.
-    mnemonic = 'acoustic movie sick lawn dutch garage aerobic broken book bachelor wing snake'
+    mnemonic = os.getenv("MNEMONIC")
 
     # Create Wallet Object
     wallet = Wallet(mnemonic)
@@ -31,12 +31,13 @@ def generate_account():
     # Convert private key into an Ethereum account
     account = Account.privateKeyToAccount(private)
 
-    return public
+    return account
 
 def get_balance(w3, address):
     """Using an Ethereum account address access the balance of Ether"""
     # Get balance of address in Wei
-    wei_balance = w3.eth.get_balance(public)
+    
+    wei_balance = w3.eth.get_balance(address)
 
     # Convert Wei value to ether
     ether = w3.fromWei(wei_balance, "ether")

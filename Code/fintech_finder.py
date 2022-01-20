@@ -62,14 +62,15 @@ account = generate_account()
 
 ##########################################
 # Write the client's Ethereum account address to the sidebar
-st.sidebar.write(account)
+st.sidebar.markdown("## Ethereum Account Address:")
+st.sidebar.write(account.address)
 
 ##########################################
 # Call `get_balance` function and pass it your account address
-get_balance(w3, address)
+ether = get_balance(w3, account.address)
 
 # Write the returned ether balance to the sidebar
-st.sidebar.write(get_balance(w3, address))
+st.sidebar.markdown(ether)
 
 ##########################################
 # Create a select box to chose a FinTech Hire candidate
