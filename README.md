@@ -17,5 +17,12 @@ You work at a startup that is building a new and disruptive platform called Fint
 ## Deliverable
 
 * Web API the end user interacts with to make payments.
+
+![Fintech App](https://github.com/cpanagopoulos/Fintech-Finder/blob/main/Code/Images/Homepage.PNG)
+
 * Wallet application to house user information and transaction history.
+
+![Transaction](https://github.com/cpanagopoulos/Fintech-Finder/blob/main/Code/Images/TX-Submission.webm)
+
 * Automate the tasks associated with generating a digital wallet, accessing Ethereum account balances, and signing and sending transactions via a personal Ethereum blockchain called Ganache.
+![Transaction Confirmation](https://github.com/cpanagopoulos/Fintech-Finder/blob/main/Code/Images/tx%20confirmation.PNG)
